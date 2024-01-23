@@ -53,8 +53,8 @@ def main():
 
     noise_level_img = 7.65/255.0         # default: 0, noise level for LR image
     noise_level_model = noise_level_img  # noise level of model, default 0
-    model_name = 'drunet_gray'           # 'drunet_gray' | 'drunet_color' | 'ircnn_gray' | 'ircnn_color'
-    testset_name = 'Set3C'               # test set,  'set5' | 'srbsd68'
+    model_name = 'ircnn_gray'           # 'drunet_gray' | 'drunet_color' | 'ircnn_gray' | 'ircnn_color'
+    testset_name = 'myset'               # test set,  'set5' | 'srbsd68'
     x8 = True                            # default: False, x8 to boost performance
     iter_num = 8                         # number of iterations
     modelSigma1 = 49
@@ -177,7 +177,7 @@ def main():
                 x = sr.data_solution(x, FB, FBC, F2B, FBFy, tau, sf)
 
                 if 'ircnn' in model_name:
-                    current_idx = np.int(np.ceil(sigmas[i].cpu().numpy()*255./2.)-1)
+                    current_idx = np.int32(np.ceil(sigmas[i].cpu().numpy()*255./2.)-1)
         
                     if current_idx != former_idx:
                         model.load_state_dict(model25[str(current_idx)], strict=True)
